@@ -5,9 +5,9 @@ using UnityEngine.Advertisements;
 public class BannerAdExample : MonoBehaviour
 {
     // For the purpose of this example, these buttons are for functionality testing:
-   public Button _loadBannerButton;
-   public Button _showBannerButton;
-   public Button _hideBannerButton;
+    public Button _loadBannerButton;
+    public Button _showBannerButton;
+    public Button _hideBannerButton;
 
     [SerializeField] BannerPosition _bannerPosition = BannerPosition.BOTTOM_CENTER;
 
@@ -87,9 +87,9 @@ public class BannerAdExample : MonoBehaviour
         Advertisement.Banner.Hide();
     }
 
-    void OnBannerClicked() { }
-    void OnBannerShown() { }
-    void OnBannerHidden() { }
+    void OnBannerClicked() => Debug.Log("배너 클릭");
+    void OnBannerShown() => Debug.Log("배너 보여주기");
+    void OnBannerHidden() => Debug.Log("배너 숨기기");
 
     void OnDestroy()
     {
