@@ -16,7 +16,7 @@ class MyCustomBuildProcessor : IPreprocessBuildWithReport
 
     public static void SetKeystore()
     {
-        string keystorePath = $"{Application.dataPath}/../KeyStore/FirstAPP.keystore";
+        string keystorePath = "KeyStore/FirstAPP.keystore";
         string keyaliasName = "1324224";
         string pass = "1324224";
 
