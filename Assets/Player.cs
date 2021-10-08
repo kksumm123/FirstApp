@@ -40,4 +40,10 @@ public class Player : MonoBehaviour
         PlayerPrefs.SetInt("point", point);
         PlayerPrefs.Save();
     }
+
+    internal void OnCompleteWatchingAD()
+    {
+        Debug.Log("±¤°í ÄÄÇÃ¸´");
+        AddPoint(1000);
+    }
 }
