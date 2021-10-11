@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireBaseManager : MonoBehaviour
+public class FirebaseManager : MonoBehaviour
 {
-    Firebase.FirebaseApp app;
+    private Firebase.FirebaseApp app;
 
+    // Start is called before the first frame update
     void Start()
     {
-        Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
-        {
+        Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task => {
             var dependencyStatus = task.Result;
             if (dependencyStatus == Firebase.DependencyStatus.Available)
             {
@@ -18,9 +18,9 @@ public class FireBaseManager : MonoBehaviour
                 app = Firebase.FirebaseApp.DefaultInstance;
 
                 // Set a flag here to indicate whether Firebase is ready to use by your app.
-                // 정상적이다, 로직실행하자
-                Debug.Log("파이어베이스 사용 가능");
-
+                // 정상적으로 왔다. 로직 실행하자.
+                Debug.Log("파이어 베이스 사용가능함");
+                FindObjectOfType<AuthManager>().InitializeFirebase();
             }
             else
             {

@@ -14,16 +14,11 @@ public class AuthManager : MonoBehaviour
     public string email;
     public string password;
 
-    void InitializeFirebase()
-    {
-        auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
-        auth.StateChanged += AuthStateChanged;
-        AuthStateChanged(this, null);
-    }
+    // 회원가입.
+    [ContextMenu("회원가입")]
     void SignUp()
     {
-        auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWith(task =>
-        {
+        auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWith(task => {
             if (task.IsCanceled)
             {
                 Debug.LogError("CreateUserWithEmailAndPasswordAsync was canceled.");
@@ -41,6 +36,35 @@ public class AuthManager : MonoBehaviour
                 newUser.DisplayName, newUser.UserId);
         });
     }
+
+    [ContextMenu("로그인")]
+    void Login()
+    {
+        auth.SignInWithEmailAndPasswordAsync(email, password).ContinueWith(task => {
+            if (task.IsCanceled)
+            {
+                Debug.LogError("SignInWithEmailAndPasswordAsync was canceled.");
+                return;
+            }
+            if (task.IsFaulted)
+            {
+                Debug.LogError("SignInWithEmailAndPasswordAsync encountered an error: " + task.Exception);
+                return;
+            }
+
+            Firebase.Auth.FirebaseUser newUser = task.Result;
+            Debug.LogFormat("User signed in successfully: {0} ({1})",
+                newUser.DisplayName, newUser.UserId);
+        });
+    }
+
+    public void InitializeFirebase()
+    {
+        auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
+        auth.StateChanged += AuthStateChanged;
+        AuthStateChanged(this, null);
+    }
+
     void AuthStateChanged(object sender, System.EventArgs eventArgs)
     {
         if (auth.CurrentUser != user)
@@ -61,8 +85,8 @@ public class AuthManager : MonoBehaviour
         }
     }
 
-    private void DebugLog(string str)
+    private void DebugLog(string v)
     {
-        Debug.Log(str);
+        Debug.Log(v);
     }
 }

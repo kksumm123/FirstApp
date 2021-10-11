@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "217670142468",
+    "project_id": "kswfirstapp",
+    "storage_bucket": "kswfirstapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:217670142468:android:0b9d7842d5550e4cf34351",
+        "android_client_info": {
+          "package_name": "cmd.KSW.KSWFirstApp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "217670142468-8dl9t0ftn9308huh63lvulfh46khdg31.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAw5RF1MdnI1L0hjQDvqNObQ8euLw3y4OE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "217670142468-8dl9t0ftn9308huh63lvulfh46khdg31.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
