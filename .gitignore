@@ -36,3 +36,4 @@ sysinfo.txt
 *.apk
 *.unitypackage
 [Ll]ogs/
+/Assets/Firebase/Plugins/x86_64/FirebaseCppApp-8_3_0.so
