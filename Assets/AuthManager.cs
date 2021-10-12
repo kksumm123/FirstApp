@@ -57,6 +57,12 @@ public class AuthManager : MonoBehaviour
                 newUser.DisplayName, newUser.UserId);
         });
     }
+    [ContextMenu("·Î±×¾Æ¿ô")]
+    void LogOut()
+    {
+        auth.SignOut();
+    }
+
 
     public void InitializeFirebase()
     {

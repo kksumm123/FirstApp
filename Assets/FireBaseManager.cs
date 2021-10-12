@@ -1,15 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FirebaseManager : MonoBehaviour
+public class FireBaseManager : MonoBehaviour
 {
     private Firebase.FirebaseApp app;
 
-    // Start is called before the first frame update
     void Start()
     {
-        Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task => {
+        Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
+        {
             var dependencyStatus = task.Result;
             if (dependencyStatus == Firebase.DependencyStatus.Available)
             {
@@ -20,7 +21,13 @@ public class FirebaseManager : MonoBehaviour
                 // Set a flag here to indicate whether Firebase is ready to use by your app.
                 // 정상적으로 왔다. 로직 실행하자.
                 Debug.Log("파이어 베이스 사용가능함");
-                FindObjectOfType<AuthManager>().InitializeFirebase();
+
+                // 실행안됨, 메인 쓰레드에서 넣어줘야함
+                //GetComponent<AuthManager>().InitializeFirebase();
+                lock (mainThreads)
+                {
+                    mainThreads.Add(() => GetComponent<AuthManager>().InitializeFirebase());
+                }
             }
             else
             {
@@ -29,5 +36,21 @@ public class FirebaseManager : MonoBehaviour
                 // Firebase Unity SDK is not safe to use here.
             }
         });
+    }
+
+    List<Action> mainThreads = new List<Action>();
+    void Update()
+    {
+        if (mainThreads.Count > 0)
+        {
+            lock (mainThreads)
+            {
+                foreach (var item in mainThreads)
+                {
+                    item();
+                }
+                mainThreads.Clear();
+            }
+        }
     }
 }
